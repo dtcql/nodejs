@@ -38,11 +38,12 @@ Promise会把每一个异步操作封装成一个承诺，这个承诺/异步函
 ```
 const fs = require("fs");
 p1 = new Promise( (resolve, reject) => {
-    fs.readFile('input.txt', function (err, data) {
-        if (err) reject(err);
+    fs.readFile('input.txt', function(err, data) {
+        if(err) reject(err);
         resolve(data);
     });
 })
 p1.then(r1=>console.log(r1.toString())).catch(e1=>console.log(e1));
 ```
-上面的例子如果读文件的异步操作fs.readFile成功了就通过resolve函数返回读出的data数据，并在then中成功时执行的函数进行打印输出，所有的错误都可以通过catch来捕捉。
+上面的例子如果读文件的异步操作fs.readFile成功了就通过resolve函数返回读出的data数据，并在then中成功时执行的函数进行打印输出。
+一般不用then里作为第二个参数的函数来处理对应reject函数返回的err，一般所有的错误都可以通过catch来捕捉。
